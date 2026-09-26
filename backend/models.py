@@ -2,7 +2,9 @@ from sqlalchemy import Column, Date, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from database import Base
+
 # data models
+
 
 class PersonFields:
     id = Column(Integer, primary_key=True, index=True)
@@ -23,16 +25,14 @@ class PersonFields:
 
     status = Column(String(10), nullable=False)
 
+
 class User(PersonFields, Base):
     __tablename__ = "users"
 
     guardianPhone = Column(String(10), nullable=True)
 
     academics = relationship(
-        "Academics",
-        back_populates="user",
-        uselist=False,
-        cascade="all, delete-orphan"
+        "Academics", back_populates="user", uselist=False, cascade="all, delete-orphan"
     )
 
 
@@ -41,22 +41,15 @@ class Academics(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    user_id = Column(
-        Integer,
-        ForeignKey("users.id"),
-        nullable=False,
-        unique=True
-    )
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True)
 
     class_name = Column("class", String(2), nullable=False)
     division = Column(String(1), nullable=False)
     batch = Column(String(20), nullable=False)
     subjects = Column(String(255), nullable=False)
 
-    user = relationship(
-        "User",
-        back_populates="academics"
-    )
+    user = relationship("User", back_populates="academics")
+
 
 class Employee(PersonFields, Base):
     __tablename__ = "employees"
@@ -64,13 +57,13 @@ class Employee(PersonFields, Base):
     empId = Column(String(50), unique=True, nullable=False)
     department = Column(String(50), nullable=False)
     role = Column(String(50), nullable=False)
-    joining_date = Column(Date,nullable=False)
+    joining_date = Column(Date, nullable=False)
 
     academics = relationship(
         "TeacherAcademics",
         back_populates="user",
         uselist=False,
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
     )
 
 
@@ -80,10 +73,7 @@ class TeacherAcademics(Base):
     id = Column(Integer, primary_key=True, index=True)
 
     employee_id = Column(
-        Integer,
-        ForeignKey("employees.id"),
-        nullable=False,
-        unique=True
+        Integer, ForeignKey("employees.id"), nullable=False, unique=True
     )
 
     class_name = Column("class", String(255), nullable=False)
@@ -91,9 +81,4 @@ class TeacherAcademics(Base):
     batch = Column(String(255), nullable=False)
     subjects = Column(String(255), nullable=False)
 
-    user = relationship(
-        "Employee",
-        back_populates="academics"
-    )
-
-
+    user = relationship("Employee", back_populates="academics")
