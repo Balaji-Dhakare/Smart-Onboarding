@@ -126,7 +126,7 @@ def fetch_teachers(
     stmt = (
         select(Employee)
         .options(joinedload(Employee.academics))
-        .where(Employee.role == "Teacher")
+        .where(Employee.department == "Teaching")
     )
 
     stmt = apply_employee_filters(

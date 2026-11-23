@@ -1,8 +1,15 @@
 from datetime import date
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # API schema models used for request validation
+
+
+def _age_in_years(date_of_birth: date, today: date) -> int:
+    age = today.year - date_of_birth.year
+    if (today.month, today.day) < (date_of_birth.month, date_of_birth.day):
+        age -= 1
+    return age
 
 
 # Common fields for Student and Employee
@@ -98,6 +105,20 @@ class StudentDetails(UserDetails, AcademicsDetails, BaseModel):
         example="9876543211",
     )
 
+    @field_validator("dob")
+    @classmethod
+    def validate_student_age(cls, value: date) -> date:
+        today = date.today()
+        if value > today:
+            raise ValueError("Date of birth cannot be in the future.")
+
+        age = _age_in_years(value, today)
+        if age <= 5:
+            raise ValueError("Student must be older than 5 years.")
+        if age >= 20:
+            raise ValueError("Student must be younger than 20 years.")
+        return value
+
 
 
 
@@ -119,6 +140,18 @@ class EmployeeDetails(UserDetails, BaseModel):
         example="Teacher",
     )
     joining_date: date = Field(..., example="2024-01-15")
+
+    @field_validator("dob")
+    @classmethod
+    def validate_employee_age(cls, value: date) -> date:
+        today = date.today()
+        if value > today:
+            raise ValueError("Date of birth cannot be in the future.")
+
+        age = _age_in_years(value, today)
+        if age <= 18:
+            raise ValueError("Employee must be older than 18 years.")
+        return value
 
 
 
