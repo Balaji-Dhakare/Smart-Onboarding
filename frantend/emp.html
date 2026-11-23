@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employees | HMarkIT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/student.css" />
+    <link rel="stylesheet" href="./css/student-table.css" />
+  </head>
+  <body>
+    <div class="student-layout">
+      <aside class="student-sidebar">
+        <a class="student-sidebar-brand" href="./index.html"><img src="./assets/images/hmarkit-mark.svg" alt="HMarkIT" /> HMarkIT</a>
+        <p>Menu</p>
+        <a href="./index.html"><i class="bi bi-grid-fill"></i> Dashboard</a>
+        <p>Components</p>
+        <a href="./student.html"><i class="bi bi-mortarboard-fill"></i> Student</a>
+        <a class="active" href="./emp.html"><i class="bi bi-person-fill"></i> Employee</a>
+      </aside>
+      <div class="student-page">
+        <header class="student-topbar">
+          <a class="student-brand" href="./index.html"><img src="./assets/images/hmarkit-mark.svg" alt="HMarkIT" /> HMarkIT</a>
+          <a class="back-link" href="./index.html">← Dashboard</a>
+        </header>
+
+        <main class="container-fluid student-main">
+          <div class="page-title-row">
+            <div>
+              <p class="eyebrow">School workforce</p>
+              <h1>Employee Directory</h1>
+              <p class="subtitle">Manage and filter registered employees.</p>
+            </div>
+            <a class="new-student-button text-decoration-none" href="./empform.html">＋ New Employee</a>
+          </div>
+
+          <section class="row g-3 mb-4" aria-label="Employee summary">
+            <div class="col-12 col-md-4">
+              <div class="student-stat">
+                <span>Total Employees</span>
+                <strong id="totalEmployees">0</strong>
+                <small>Employees in the system</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="filter-panel" aria-label="Filter employees">
+            <div class="filter-heading">
+              <div><h2>Filters</h2></div>
+              <span id="resultCount">0 results</span>
+            </div>
+            <div class="row g-3">
+              <div class="col-12 col-lg-3">
+                <label for="employeeSearch">Search</label>
+                <input id="employeeSearch" type="search" placeholder="Search by name or email" />
+              </div>
+              <div class="col-6 col-lg-3">
+                <label for="departmentFilter">Department</label>
+                <select id="departmentFilter">
+                  <option value="">All departments</option>
+                  <option value="Teaching">Teaching</option>
+                  <option value="Clenning">Cleaning Staff</option>
+                  <option value="Accounts">Accounts</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Operations">Operations</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-3">
+                <label for="roleFilter">Role / Position</label>
+                <input id="roleFilter" type="search" placeholder="Search by role" />
+              </div>
+              <div class="col-6 col-lg-1">
+                <label for="genderFilter">Gender</label>
+                <select id="genderFilter">
+                  <option value="">All</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-2 d-flex align-items-end filter-actions">
+                <button class="clear-button" id="clearFilters" type="button">Clear</button>
+                <button class="apply-button" id="applyFilters" type="button"><i class="bi bi-search" aria-hidden="true"></i> Apply</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="employeeGrid" class="student-table-panel" aria-live="polite">
+            <div class="loading-state">Loading employees...</div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script src="./js/api/employeeApi.js"></script>
+    <script src="./js/emp.js"></script>
+  </body>
+</html>

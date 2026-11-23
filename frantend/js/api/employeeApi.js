@@ -1,8 +1,15 @@
 (function () {
   const API_BASE_URL = "http://127.0.0.1:8000";
+  const DEFAULT_EMPLOYEE_ENDPOINT = "/employees/";
+  const DEPARTMENT_EMPLOYEE_ENDPOINTS = {
+    Teaching: "/employees/teachers",
+  };
 
   async function submitEmployeeAdmission(payload) {
-    const response = await fetch(`${API_BASE_URL}/employees/`, {
+    const endpoint =
+      DEPARTMENT_EMPLOYEE_ENDPOINTS[payload.department] ||
+      DEFAULT_EMPLOYEE_ENDPOINT;
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=UTF-8"
@@ -30,7 +37,23 @@
     return response.json();
   }
 
+    async function getEmployees() {
+    const response = await fetch(`${API_BASE_URL}/employees/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch Employees: ${response.status}`);
+    }
+
+    return response.json();
+  }
+
   window.employeeApi = {
-    submitEmployeeAdmission
+    submitEmployeeAdmission,
+    getEmployees,
   };
 })();

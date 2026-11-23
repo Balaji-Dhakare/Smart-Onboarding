@@ -5,6 +5,17 @@
 // GET HTML ELEMENTS
 // ======================================================
 
+const {
+  clearError,
+  showError,
+  showSuccess,
+  validateEmail,
+  validateName,
+  validatePhone,
+  validateSelect,
+  validateZip,
+} = window.validators;
+
 const country = document.getElementById("country");
 const state = document.getElementById("state");
 
@@ -56,7 +67,7 @@ middleName.addEventListener("blur", () => {
   if (middleName.value.trim() !== "") {
     validateName(middleName, "Middle name");
   } else {
-    clearValidation(middleName);
+    clearError(middleName);
   }
 });
 
@@ -119,203 +130,10 @@ subjectCheckboxes.forEach(checkbox => {
 // SET MAXIMUM DOB TO TODAY
 // ======================================================
 
-const today = new Date()
-  .toISOString()
-  .split("T")[0];
+dob.max = window.validators.getTodayDateString();
 
-dob.max = today;
 
 
-
-
-
-// ======================================================
-// VALIDATION HELPERS
-// ======================================================
-
-function showError(input, message) {
-
-  input.classList.add("is-invalid");
-  input.classList.remove("is-valid");
-
-  const feedback =
-    input.parentElement.querySelector(".invalid-feedback");
-
-  if (feedback) {
-    feedback.textContent = message;
-  }
-
-}
-
-
-function showSuccess(input) {
-
-  input.classList.remove("is-invalid");
-  input.classList.add("is-valid");
-
-}
-
-
-function clearValidation(input) {
-
-  input.classList.remove(
-    "is-invalid",
-    "is-valid"
-  );
-
-}
-
-
-// ======================================================
-// NAME VALIDATION
-// ======================================================
-
-function validateName(input, fieldName) {
-
-  const value = input.value.trim();
-
-  const namePattern =
-    /^[A-Za-z]+(?: [A-Za-z]+)*$/;
-
-
-  if (value === "") {
-
-    showError(
-      input,
-      `${fieldName} is required.`
-    );
-
-    return false;
-
-  }
-
-
-  if (value.length < 2) {
-
-    showError(
-      input,
-      `${fieldName} must contain at least 2 characters.`
-    );
-
-    return false;
-
-  }
-
-
-  if (!namePattern.test(value)) {
-
-    showError(
-      input,
-      `${fieldName} should contain letters only.`
-    );
-
-    return false;
-
-  }
-
-
-  showSuccess(input);
-
-  return true;
-
-}
-
-
-// ======================================================
-// EMAIL VALIDATION
-// ======================================================
-
-function validateEmail() {
-
-  const value = email.value.trim();
-
-  const emailPattern =
-    /^[A-Za-z][^\s@]*@[^\s@]+\.[^\s@]+$/;
-
-
-  if (value === "") {
-
-    showError(
-      email,
-      "Email is required."
-    );
-
-    return false;
-
-  }
-
-
-  if (!emailPattern.test(value)) {
-
-    showError(
-      email,
-      "Please enter a valid email address."
-    );
-
-    return false;
-
-  }
-
-
-  showSuccess(email);
-
-  return true;
-
-}
-
-
-// ======================================================
-// PHONE VALIDATION
-// ======================================================
-
-function validatePhone(input, required = false) {
-
-  const value = input.value.trim();
-
-  const phonePattern =
-    /^[6-9][0-9]{9}$/;
-
-
-  // Optional field left empty
-  if (value === "" && !required) {
-
-    clearValidation(input);
-
-    return true;
-
-  }
-
-
-  // Required field left empty
-  if (value === "") {
-
-    showError(
-      input,
-      "Mobile number is required."
-    );
-
-    return false;
-
-  }
-
-
-  if (!phonePattern.test(value)) {
-
-    showError(
-      input,
-      "Enter a valid 10-digit mobile number."
-    );
-
-    return false;
-
-  }
-
-
-  showSuccess(input);
-
-  return true;
-
-}
 
 
 // ======================================================
@@ -337,11 +155,8 @@ function validateDOB() {
 
   }
 
-  const selectedDate = new Date(value);
-  const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0);
-
-  if (selectedDate > currentDate) {
+  const today = window.validators.getTodayDateString();
+  if (value > today) {
 
     showError(
       dob,
@@ -352,26 +167,25 @@ function validateDOB() {
 
   }
 
-  // Age validation: Student must be 3-18 years old
-  let age = currentDate.getFullYear() - selectedDate.getFullYear();
-  const monthDiff = currentDate.getMonth() - selectedDate.getMonth();
-  
-  if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {
-    age--;
+  const age = window.validators.calculateAge(value);
+
+  if (!Number.isFinite(age)) {
+    showError(dob, "Please enter a valid date of birth.");
+    return false;
   }
 
-  if (age < 3) {
+  if (age <= 5) {
     showError(
       dob,
-      "Student must be at least 3 years old."
+      "Student must be older than 5 years."
     );
     return false;
   }
 
-  if (age > 18) {
+  if (age >= 20) {
     showError(
       dob,
-      "Student must be 18 years old or younger."
+      "Student must be younger than 20 years."
     );
     return false;
   }
@@ -382,73 +196,6 @@ function validateDOB() {
 
 }
 
-
-
-// ======================================================
-// SELECT VALIDATION
-// ======================================================
-
-function validateSelect(input, fieldName) {
-
-  if (input.value === "") {
-
-    showError(
-      input,
-      `${fieldName} is required.`
-    );
-
-    return false;
-
-  }
-
-
-  showSuccess(input);
-
-  return true;
-
-}
-
-
-// ======================================================
-// ZIP VALIDATION
-// ======================================================
-
-function validateZip() {
-
-  const value = zip.value.trim();
-
-
-  // Optional field
-  if (value === "") {
-
-    clearValidation(zip);
-
-    return true;
-
-  }
-
-
-  const zipPattern =
-    /^[0-9]{6}$/;
-
-
-  if (!zipPattern.test(value)) {
-
-    showError(
-      zip,
-      "PIN code must contain exactly 6 digits."
-    );
-
-    return false;
-
-  }
-
-
-  showSuccess(zip);
-
-  return true;
-
-}
 
 
 // ======================================================
@@ -599,7 +346,7 @@ form.addEventListener("submit", function (event) {
   // EMAIL
   // ====================================================
 
-  if (!validateEmail()) {
+  if (!validateEmail(email)) {
     isValid = false;
   }
 
@@ -663,7 +410,7 @@ form.addEventListener("submit", function (event) {
   // ZIP
   // ====================================================
 
-  if (!validateZip()) {
+  if (!validateZip(zip)) {
     isValid = false;
   }
 

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Employee Registration Form</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- EmailJS Library -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "XP0-BHfuV7fLNGjeT",
+        });
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div class="form-container" id="formcontainer">
+      <form id="employeeForm" method="get" novalidate>
+        <h2>Employee Registration Form</h2>
+        <hr />
+
+        <!-- Personal Details Section -->
+        <div class="form-section">
+          <div class="section-title">Personal Details</div>
+
+          <div class="row g-3">
+            <!-- First Name -->
+            <div class="col-sm-6 col-md-4">
+              <label for="firstName" class="form-label">
+                First Name
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="firstName"
+                placeholder="e.g., John"
+                minlength="2"
+                pattern="[A-Za-z]+(?: [A-Za-z]+)*"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter a valid first name.
+              </div>
+            </div>
+
+            <!-- Middle Name -->
+            <div class="col-sm-6 col-md-4">
+              <label for="middleName" class="form-label">
+                Middle Name
+                <span class="optional-text">(optional)</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="middleName"
+                name="middleName"
+                placeholder="e.g., Robert"
+                pattern="[A-Za-z]+(?: [A-Za-z]+)*"
+              />
+              <div class="invalid-feedback">
+                Please enter a valid middle name.
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="col-sm-6 col-md-4">
+              <label for="lastName" class="form-label">
+                Last Name
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                name="lastName"
+                placeholder="e.g., Smith"
+                minlength="2"
+                pattern="[A-Za-z]+(?: [A-Za-z]+)*"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter a valid last name.
+              </div>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="col-sm-6 col-md-4">
+              <label for="dob" class="form-label">
+                Date of Birth
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="dob"
+                name="dob"
+                required
+              />
+              <div class="invalid-feedback">
+                Employee must be older than 18 years.
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="col-sm-6 col-md-4">
+              <label class="form-label">
+                Gender
+                <span class="required-indicator">*</span>
+              </label>
+              <div class="gender-options">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="genderMale"
+                    value="Male"
+                    required
+                  />
+                  <label class="form-check-label" for="genderMale">Male</label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="genderFemale"
+                    value="Female"
+                    required
+                  />
+                  <label class="form-check-label" for="genderFemale">Female</label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="genderOther"
+                    value="Other"
+                    required
+                  />
+                  <label class="form-check-label" for="genderOther">Other</label>
+                </div>
+              </div>
+              <div class="invalid-feedback" id="genderError" style="display: none;">
+                Please select a gender.
+              </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="col-sm-6 col-md-4">
+              <label for="email" class="form-label">
+                Email Address
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="john.smith@company.com"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter a valid email address.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employment & Contact Details Section -->
+        <div class="form-section">
+          <div class="section-title">Employment & Contact Details</div>
+
+          <div class="row g-3">
+            <!-- Employee ID -->
+            <div class="col-sm-6 col-md-4">
+              <label for="employeeId" class="form-label">
+                Employee ID
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="employeeId"
+                name="employeeId"
+                placeholder="e.g., EMP-1001"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter a valid Employee ID.
+              </div>
+            </div>
+
+            <!-- Employee Contact -->
+            <div class="col-sm-6 col-md-4">
+              <label for="phone" class="form-label">
+                Employee Contact
+                <span class="required-indicator">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">+91</span>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="phone"
+                  name="phone"
+                  placeholder="Enter 10-digit number"
+                  pattern="[6-9][0-9]{9}"
+                  maxlength="10"
+                  required
+                />
+              </div>
+              <div class="invalid-feedback">
+                Enter a valid 10-digit mobile number.
+              </div>
+            </div>
+
+            <!-- Joining Date -->
+            <div class="col-sm-6 col-md-4">
+              <label for="joiningDate" class="form-label">
+                Joining Date
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                id="joiningDate"
+                name="joiningDate"
+                required
+              />
+              <div class="invalid-feedback">
+                Please select a valid joining date.
+              </div>
+            </div>
+
+            <!-- Department -->
+            <div class="col-sm-6 col-md-6">
+              <label for="department" class="form-label">
+                Department
+                <span class="required-indicator">*</span>
+              </label>
+              <select class="form-select" id="department" name="department" required>
+                <option value="" disabled selected>-- Select Department --</option>
+                <option value="Teaching">Teaching</option>
+                <option value="Clenning">Clenning Staff</option>
+                <option value="Accounts">Accounts</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sales">Sales</option>
+                <option value="Operations">Operations</option>
+              </select>
+              <div class="invalid-feedback">Please select a department.</div>
+            </div> 
+            
+            <!-- Role -->
+            <div class="col-sm-6 col-md-6">
+              <label for="role" class="form-label">
+                Role
+                <span class="required-indicator">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="role"
+                name="role"
+                placeholder="e.g., Software Engineer"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter employee role.
+              </div>
+            </div>
+
+            <div class="col-12" id="teacherFields" hidden>
+              <div class="row g-3">
+                <div class="col-12">
+                  <span id="teacherClassLabel" class="form-label">
+                    Class
+                    <span class="required-indicator">*</span>
+                  </span>
+                  <div class="selection-pills class-options" role="group" aria-labelledby="teacherClassLabel" aria-describedby="teacherClassError">
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="class" value="1" />
+                      <span>1st</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass2" value="2" />
+                      <span>2nd</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass3" value="3" />
+                      <span>3rd</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass4" value="4" />
+                      <span>4th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass5" value="5" />
+                      <span>5th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass6" value="6" />
+                      <span>6th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass7" value="7" />
+                      <span>7th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass8" value="8" />
+                      <span>8th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass9" value="9" />
+                      <span>9th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass10" value="10" />
+                      <span>10th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass11" value="11" />
+                      <span>11th</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="class_name" id="teacherClass12" value="12" />
+                      <span>12th</span>
+                    </label>
+                  </div>
+                  <div class="invalid-feedback" id="teacherClassError" style="display: none;">Please select at least one class.</div>
+                </div>
+
+                <div class="col-12">
+                  <span id="teacherDivisionLabel" class="form-label">
+                    Division
+                    <span class="required-indicator">*</span>
+                  </span>
+                  <div class="selection-pills" role="group" aria-labelledby="teacherDivisionLabel" aria-describedby="teacherDivisionError">
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="division" id="division" value="A" />
+                      <span>A</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="division" id="teacherDivisionB" value="B" />
+                      <span>B</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="division" id="teacherDivisionC" value="C" />
+                      <span>C</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="division" id="teacherDivisionD" value="D" />
+                      <span>D</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="division" id="teacherDivisionE" value="E" />
+                      <span>E</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="division" id="teacherDivisionF" value="F" />
+                      <span>F</span>
+                    </label>
+                  </div>
+                  <div class="invalid-feedback" id="teacherDivisionError" style="display: none;">Please select at least one division.</div>
+                </div>
+
+                <div class="col-12">
+                  <span id="teacherBatchLabel" class="form-label">
+                    Batch
+                    <span class="required-indicator">*</span>
+                  </span>
+                  <div class="selection-pills" role="group" aria-labelledby="teacherBatchLabel" aria-describedby="teacherBatchError">
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="batch" id="batch" value="morning" />
+                      <span>Morning</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="batch" id="teacherBatchAfternoon" value="afternoon" />
+                      <span>Afternoon</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="batch" id="teacherBatchEvening" value="evening" />
+                      <span>Evening</span>
+                    </label>
+                  </div>
+                  <div class="invalid-feedback" id="teacherBatchError" style="display: none;">Please select at least one batch.</div>
+                </div>
+
+                <div class="col-12">
+                  <label id="teacherSubjectsLabel" class="form-label">
+                    Subjects
+                    <span class="required-indicator">*</span>
+                  </label>
+                  <div class="selection-pills" role="group" aria-labelledby="teacherSubjectsLabel" aria-describedby="subjectError">
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="subjects" id="math" value="Math" />
+                      <span>Math</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="subjects" id="science" value="Science" />
+                      <span>Science</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="subjects" id="english" value="English" />
+                      <span>English</span>
+                    </label>
+                    <label class="selection-pill">
+                      <input class="selection-pill-input" type="checkbox" name="subjects" id="marathi" value="Marathi" />
+                      <span>Marathi</span>
+                    </label>
+                  </div>
+                  <div class="invalid-feedback" id="subjectError" style="display: none;">
+                    Please select at least one subject.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Address Information Section -->
+        <div class="form-section">
+          <div class="section-title">Address Information</div>
+
+          <div class="row g-3">
+            <!-- Address -->
+            <div class="col-12">
+              <label for="address" class="form-label">
+                Address
+                <span class="optional-text">(optional)</span>
+              </label>
+              <textarea
+                class="form-control"
+                id="address"
+                name="address"
+                placeholder="Enter complete address"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <!-- Country -->
+            <div class="col-sm-6 col-md-5">
+              <label for="country" class="form-label">
+                Country
+                <span class="required-indicator">*</span>
+              </label>
+              <select class="form-select" id="country" name="country" required>
+                <option value="" disabled selected>-- Select a Country --</option>
+              </select>
+              <div class="invalid-feedback">Please select a country.</div>
+            </div>
+
+            <!-- State -->
+            <div class="col-sm-6 col-md-4">
+              <label for="state" class="form-label">
+                State
+                <span class="required-indicator">*</span>
+              </label>
+              <select class="form-select" id="state" name="state" required disabled>
+                <option value="" disabled selected>-- Select a State --</option>
+              </select>
+              <div class="invalid-feedback">Please select a state.</div>
+            </div>
+
+            <!-- PIN Code -->
+            <div class="col-sm-6 col-md-3">
+              <label for="zip" class="form-label">
+                PIN Code
+                <span class="optional-text">(optional)</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="zip"
+                name="zip"
+                placeholder="6-digit PIN"
+                maxlength="6"
+                pattern="[0-9]{6}"
+              />
+              <div class="invalid-feedback">
+                PIN code must contain exactly 6 digits.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center text-md-start">
+          <button class="btn btn-primary btn-submit text-white" type="submit">
+            Submit Form
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYjWjR9"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/location.js"></script>
+    <script src="js/api/employeeApi.js"></script>
+    <script src="js/email/emailService.js"></script>
+    <script src="js/validators.js"></script>
+    <script src="js/employeeForm.js"></script>
+  </body>
+</html>

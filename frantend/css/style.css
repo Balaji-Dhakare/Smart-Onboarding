@@ -156,6 +156,74 @@ body {
   accent-color: #007bff;
 }
 
+.selection-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+
+.class-options {
+  max-width: 520px;
+}
+
+.selection-pill {
+  cursor: pointer;
+  display: inline-flex;
+  margin: 0;
+  position: relative;
+}
+
+.selection-pill-input {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.selection-pill span {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d5dce3;
+  border-radius: 50px;
+  color: #40566e;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: center;
+  min-height: 52px;
+  min-width: 44px;
+  padding: 12px 20px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.selection-pill:hover span {
+  background: #f1f8ff;
+  border-color: #86b7fe;
+}
+
+.selection-pill-input:checked + span {
+  background: #e7f1ff;
+  border-color: #0d6efd;
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+.selection-pill-input:focus-visible + span {
+  outline: 3px solid rgba(13, 110, 253, 0.25);
+  outline-offset: 2px;
+}
+
+.selection-pill-input.is-invalid + span {
+  border-color: #dc3545;
+}
+
 .btn-submit {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   border: none;
