@@ -45,8 +45,34 @@ const API_BASE_URL = "http://127.0.0.1:8000";
     return response.json();
   }
 
+  async function getStudent(id) {
+    const response = await fetch(
+      `${API_BASE_URL}/students/?id=${encodeURIComponent(id)}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch student: ${response.status}`);
+    }
+
+    const result = await response.json();
+    const student = result.data?.[0];
+
+    if (!student) {
+      throw new Error("Student not found.");
+    }
+
+    return student;
+  }
+
   window.studentApi = {
     submitStudentAdmission,
     getStudents,
+    getStudent,
   };
 })();

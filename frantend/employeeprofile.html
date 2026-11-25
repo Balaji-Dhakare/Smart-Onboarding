@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Profile | HMarkIT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/student.css" />
+    <link rel="stylesheet" href="./css/student-table.css" />
+    <link rel="stylesheet" href="./css/student-profile.css" />
+  </head>
+  <body>
+    <div class="student-layout">
+      <aside class="student-sidebar">
+        <a class="student-sidebar-brand" href="./index.html"><img src="./assets/images/hmarkit-mark.svg" alt="" /> HMarkIT</a>
+        <p>Menu</p>
+        <a href="./index.html"><i class="bi bi-grid-fill"></i> Dashboard</a>
+        <p>Components</p>
+        <a href="./student.html"><i class="bi bi-mortarboard-fill"></i> Student</a>
+        <a class="active" href="./emp.html"><i class="bi bi-person-fill"></i> Employee</a>
+      </aside>
+
+      <div class="student-page profile-page">
+        <header class="student-topbar profile-topbar">
+          <a class="student-brand" href="./index.html"><img src="./assets/images/hmarkit-mark.svg" alt="" /> HMarkIT</a>
+          <a class="back-link" href="./emp.html"><i class="bi bi-arrow-left me-1"></i> Employee directory</a>
+        </header>
+
+        <main class="container-fluid student-main profile-main">
+          <div class="profile-layout">
+            <section class="profile-content" aria-labelledby="profileHeading">
+              <div class="profile-identity">
+                <div class="profile-avatar" id="profileAvatar" aria-hidden="true">EM</div>
+                <div>
+                  <h2 class="profile-name" id="profileName">Loading employee...</h2>
+                  <p class="profile-subtitle" id="profileAcademic">Employee</p>
+                  <span class="profile-status" id="profileStatus">Loading</span>
+                </div>
+              </div>
+
+              <div class="profile-heading-row">
+                <div>
+                  <p class="profile-eyebrow">Employee record</p>
+                  <h1 id="profileHeading">Employee Profile</h1>
+                  <p class="profile-description">Personal and professional information</p>
+                </div>
+                <span class="read-only-label"><i class="bi bi-lock-fill"></i> View only</span>
+              </div>
+
+              <div class="profile-message" id="profileMessage" role="status" aria-live="polite">Loading employee profile...</div>
+
+              <div class="profile-page-content">
+                <section aria-labelledby="personalHeading">
+                  <div class="profile-section-heading">
+                    <span class="profile-heading-icon"><i class="bi bi-person-vcard"></i></span>
+                    <div><h2 id="personalHeading">Personal information</h2><p>Contact and employment details</p></div>
+                  </div>
+                  <dl class="profile-details">
+                    <div class="detail-row"><dt>First name</dt><dd id="firstName">—</dd></div>
+                    <div class="detail-row"><dt>Middle name</dt><dd id="middleName">—</dd></div>
+                    <div class="detail-row"><dt>Last name</dt><dd id="lastName">—</dd></div>
+                    <div class="detail-row"><dt>Email</dt><dd id="email">—</dd></div>
+                    <div class="detail-row"><dt>Phone</dt><dd id="phone">—</dd></div>
+                    <div class="detail-row"><dt>Employee ID</dt><dd id="employeeId">—</dd></div>
+                    <div class="detail-row"><dt>Gender</dt><dd id="gender">—</dd></div>
+                    <div class="detail-row"><dt>Date of birth</dt><dd id="dob">—</dd></div>
+                    <div class="detail-row"><dt>Address</dt><dd id="address">—</dd></div>
+                    <div class="detail-row"><dt>Country</dt><dd id="country">—</dd></div>
+                    <div class="detail-row"><dt>State</dt><dd id="state">—</dd></div>
+                    <div class="detail-row"><dt>ZIP code</dt><dd id="zip">—</dd></div>
+                  </dl>
+                </section>
+
+                <section class="academic-profile-section" aria-labelledby="professionalHeading">
+                  <div class="profile-section-heading">
+                    <span class="profile-heading-icon"><i class="bi bi-briefcase"></i></span>
+                    <div><h2 id="professionalHeading">Additional information</h2><p>Department and employment details</p></div>
+                  </div>
+                  <dl class="profile-details">
+                    <div class="detail-row"><dt>Department</dt><dd id="department">—</dd></div>
+                    <div class="detail-row"><dt>Role</dt><dd id="role">—</dd></div>
+                    <div class="detail-row"><dt>Joining date</dt><dd id="joiningDate">—</dd></div>
+                  </dl>
+                  <div id="employeeAcademicRows" hidden>
+                    <dl class="profile-details">
+                      <div class="detail-row"><dt>Class</dt><dd id="academicClassName">—</dd></div>
+                      <div class="detail-row"><dt>Division</dt><dd id="academicDivision">—</dd></div>
+                      <div class="detail-row"><dt>Batch</dt><dd id="academicBatch">—</dd></div>
+                      <div class="detail-row"><dt>Subjects</dt><dd id="academicSubjects">—</dd></div>
+                    </dl>
+                  </div>
+                </section>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/api/employeeApi.js"></script>
+    <script src="./js/employee-profile.js"></script>
+  </body>
+</html>

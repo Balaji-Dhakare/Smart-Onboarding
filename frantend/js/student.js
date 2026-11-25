@@ -78,6 +78,7 @@ function render() {
               <th>Batch</th>
               <th>Gender</th>
               <th>Status</th>
+              <th>Profile</th>
             </tr>
           </thead>
           <tbody>
@@ -106,6 +107,8 @@ function render() {
               const status =
                 getValue(student, "status") || "Active";
 
+              const studentId = getValue(student, "id");
+
               return `
                 <tr>
                   <td>
@@ -122,6 +125,9 @@ function render() {
                   <td>
                     <span class="status-badge">${status}</span>
                   </td>
+                  <td>
+                    <button class="student-profile-button" type="button" data-profile-url="./studentprofile.html?id=${encodeURIComponent(studentId)}">View profile</button>
+                  </td>
                 </tr>
               `;
             }).join("")}
@@ -133,6 +139,18 @@ function render() {
       </div>`;
 }
 console.log("studentApi:", window.studentApi);
+
+elements.grid.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const button = event.target.closest(".student-profile-button");
+  if (button) {
+    window.location.assign(button.dataset.profileUrl);
+  }
+});
+
 async function loadStudents() {
   try {
     const response = await window.studentApi.getStudents();

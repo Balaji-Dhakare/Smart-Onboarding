@@ -71,6 +71,7 @@ function render() {
               <th>Role</th>
               <th>Joining Date</th>
               <th>Status</th>
+              <th>Profile</th>
             </tr>
           </thead>
           <tbody>
@@ -84,6 +85,7 @@ function render() {
               const gender = getValue(emp, "gender") || "-";
               const name = fullName(emp);
               const status = getValue(emp, "status") || "Active";
+              const employeeDatabaseId = getValue(emp, "id");
 
               return `
                 <tr>
@@ -101,6 +103,9 @@ function render() {
                   <td>${joiningDate}</td>
                   <td>
                     <span class="status-badge">${status}</span>
+                  </td>
+                  <td>
+                    <button class="student-profile-button" type="button" data-profile-url="./employeeprofile.html?id=${encodeURIComponent(employeeDatabaseId)}">View profile</button>
                   </td>
                 </tr>
               `;
@@ -137,6 +142,17 @@ document.getElementById("clearFilters").addEventListener("click", () => {
   elements.roleFilter.value = "";
   elements.genderFilter.value = "";
   render();
+});
+
+elements.grid.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const button = event.target.closest(".student-profile-button");
+  if (button) {
+    window.location.assign(button.dataset.profileUrl);
+  }
 });
 
 loadEmployees();

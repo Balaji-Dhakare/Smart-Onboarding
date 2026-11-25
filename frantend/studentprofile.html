@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile | HMarkIT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/student.css" />
+    <link rel="stylesheet" href="./css/student-table.css" />
+    <link rel="stylesheet" href="./css/student-profile.css" />
+  </head>
+  <body>
+    <div class="student-layout">
+      <aside class="student-sidebar">
+        <a class="student-sidebar-brand" href="./index.html"><img src="./assets/images/hmarkit-mark.svg" alt="" /> HMarkIT</a>
+        <p>Menu</p>
+        <a href="./index.html"><i class="bi bi-grid-fill"></i> Dashboard</a>
+        <p>Components</p>
+        <a class="active" href="./student.html"><i class="bi bi-mortarboard-fill"></i> Student</a>
+        <a href="./emp.html"><i class="bi bi-person-fill"></i> Employee</a>
+      </aside>
+
+      <div class="student-page profile-page">
+        <header class="student-topbar profile-topbar">
+          <a class="student-brand" href="./index.html"><img src="./assets/images/hmarkit-mark.svg" alt="" /> HMarkIT</a>
+          <a class="back-link" href="./student.html"><i class="bi bi-arrow-left me-1"></i> Student directory</a>
+        </header>
+
+        <main class="container-fluid student-main profile-main">
+          <div class="profile-layout">
+            <section class="profile-content" aria-labelledby="profileHeading">
+              <div class="profile-identity">
+                <div class="profile-avatar" id="profileAvatar" aria-hidden="true">ST</div>
+                <div>
+                  <h2 class="profile-name" id="profileName">Loading student...</h2>
+                  <p class="profile-subtitle" id="profileAcademic">Student</p>
+                  <span class="profile-status" id="profileStatus">Loading</span>
+                </div>
+              </div>
+
+              <div class="profile-heading-row">
+                <div>
+                  <p class="profile-eyebrow">Student record</p>
+                  <h1 id="profileHeading">Student Profile</h1>
+                  <p class="profile-description">Personal and academic information</p>
+                </div>
+                <span class="read-only-label"><i class="bi bi-lock-fill"></i> View only</span>
+              </div>
+
+              <div class="profile-message" id="profileMessage" role="status" aria-live="polite">Loading student profile...</div>
+
+              <div class="profile-page-content">
+                <section aria-labelledby="personalHeading">
+                  <div class="profile-section-heading">
+                    <span class="profile-heading-icon"><i class="bi bi-person-vcard"></i></span>
+                    <div><h2 id="personalHeading">Personal information</h2><p>Contact and personal details</p></div>
+                  </div>
+                  <dl class="profile-details">
+                    <div class="detail-row"><dt>First name</dt><dd id="firstName">—</dd></div>
+                    <div class="detail-row"><dt>Middle name</dt><dd id="middleName">—</dd></div>
+                    <div class="detail-row"><dt>Last name</dt><dd id="lastName">—</dd></div>
+                    <div class="detail-row"><dt>Email</dt><dd id="email">—</dd></div>
+                    <div class="detail-row"><dt>Phone</dt><dd id="phone">—</dd></div>
+                    <div class="detail-row"><dt>Guardian phone</dt><dd id="guardianPhone">—</dd></div>
+                    <div class="detail-row"><dt>Gender</dt><dd id="gender">—</dd></div>
+                    <div class="detail-row"><dt>Date of birth</dt><dd id="dob">—</dd></div>
+                    <div class="detail-row"><dt>Address</dt><dd id="address">—</dd></div>
+                    <div class="detail-row"><dt>Country</dt><dd id="country">—</dd></div>
+                    <div class="detail-row"><dt>State</dt><dd id="state">—</dd></div>
+                    <div class="detail-row"><dt>ZIP code</dt><dd id="zip">—</dd></div>
+                  </dl>
+                </section>
+
+                <section class="academic-profile-section" aria-labelledby="academicHeading">
+                  <div class="profile-section-heading">
+                    <span class="profile-heading-icon"><i class="bi bi-mortarboard"></i></span>
+                    <div><h2 id="academicHeading">Academic information</h2><p>Current class and enrollment details</p></div>
+                  </div>
+                  <dl class="profile-details academic-details">
+                    <div class="detail-row"><dt>Class</dt><dd id="className">—</dd></div>
+                    <div class="detail-row"><dt>Division</dt><dd id="division">—</dd></div>
+                    <div class="detail-row"><dt>Batch</dt><dd id="batch">—</dd></div>
+                    <div class="detail-row">
+                      <dt>Subjects</dt>
+                      <dd><div class="subject-list" id="subjectList"><span class="empty-subjects">No subjects listed</span></div></dd>
+                    </div>
+                  </dl>
+                </section>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./js/api/studentApi.js"></script>
+    <script src="./js/student-profile.js"></script>
+  </body>
+</html>

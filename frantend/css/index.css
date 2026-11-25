@@ -390,18 +390,19 @@ a {
   color: #fff;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 168px;
-  padding: 28px;
+  gap: clamp(8px, 2vw, 16px);
+  min-height: clamp(110px, 20vw, 168px);
+  min-width: 0;
+  padding: clamp(12px, 2.5vw, 28px);
   position: relative;
 }
 .summary-card img {
   flex: 0 0 auto;
   background: transparent;
-  height: 58px;
+  height: clamp(32px, 5vw, 58px);
   margin: 0;
   object-fit: contain;
-  width: 58px;
+  width: clamp(32px, 5vw, 58px);
 }
 .summary-card strong {
   font-size: 36px;
@@ -415,7 +416,8 @@ a {
 .summary-body {
   align-items: center;
   display: flex;
-  gap: 18px;
+  gap: clamp(8px, 2vw, 18px);
+  min-width: 0;
 }
 .card-stat {
   border: 0;
@@ -464,7 +466,7 @@ a {
   font-size: 14px;
 }
 .summary-card strong {
-  font-size: 36px;
+  font-size: clamp(22px, 4vw, 36px);
   line-height: 1.1;
   margin: 4px 0;
 }

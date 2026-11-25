@@ -4,6 +4,22 @@
 .student-sidebar a:not(.student-sidebar-brand) {
   text-decoration: none;
 }
+.student-profile-button {
+  background: var(--dark);
+  border: 1px solid var(--dark);
+  border-radius: 14px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 10px;
+}
+.student-profile-button:hover,
+.student-profile-button:focus-visible {
+  background: #0b4936;
+  border-color: #0b4936;
+  color: #fff;
+}
 .student-sidebar-brand:hover,
 .student-sidebar-brand:focus,
 .student-sidebar a:not(.student-sidebar-brand):hover,

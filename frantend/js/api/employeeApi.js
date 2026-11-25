@@ -52,8 +52,57 @@
     return response.json();
   }
 
+  async function getEmployee(id) {
+    const query = `?id=${encodeURIComponent(id)}`;
+    const response = await fetch(`${API_BASE_URL}/employees/${query}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch employee: ${response.status}`);
+    }
+
+    const result = await response.json();
+    const employee = result.data?.[0];
+
+    if (!employee) {
+      throw new Error("Employee not found.");
+    }
+
+    if (String(employee.department).trim().toLowerCase() !== "teaching") {
+      return employee;
+    }
+
+    const teacherResponse = await fetch(
+      `${API_BASE_URL}/employees/teachers/${query}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!teacherResponse.ok) {
+      throw new Error(`Failed to fetch teaching details: ${teacherResponse.status}`);
+    }
+
+    const teacherResult = await teacherResponse.json();
+    const teacher = teacherResult.data?.[0];
+
+    return {
+      ...employee,
+      isTeacher: true,
+      academics: teacher?.academics || null,
+    };
+  }
+
   window.employeeApi = {
     submitEmployeeAdmission,
     getEmployees,
+    getEmployee,
   };
 })();
